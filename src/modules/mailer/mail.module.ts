@@ -3,6 +3,8 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { MailController } from './mail.controller';
 import { MailService } from './mail.service';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { Configuration } from '../../config/config.keys';
+import { ConfigService } from "src/config/config.service";
 
 
 @Module({
@@ -11,11 +13,11 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
             useFactory: () => ({
                 transport: {
                     host: 'smtp.gmail.com',
-                    port: 465,
-                    secure: true,
+                    port: 587,
+                    secure: false,
                     auth: {
-                        user: "watankes",
-                        pass: "Cdekaur15"
+                        user: 'watankes',
+                        pass: 'Cdekaur92'
                     },
                     default: {
                         from: 'watankes@gmail.com',
@@ -32,7 +34,20 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
             })
         })
     ],
-    providers: [MailService],
+    providers: [MailService,ConfigService],
     controllers: [MailController]
 })
-export class MailModule { }
+export class MailModule { 
+    static user={
+        account:"",
+        password:"",
+        mail:""
+   }
+    constructor(private readonly _configService: ConfigService) {
+       MailModule.user={
+            account:this._configService.get(Configuration.ACCOUNT),
+            password:this._configService.get(Configuration.PASSWORD),
+            mail:this._configService.get(Configuration.MAIL)
+       }
+      }
+}

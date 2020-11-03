@@ -29,7 +29,11 @@ export class ConfigService {
           JWT_SECRET: process.env.JWT_SECRET,
           SYNCHRONIZE: process.env.SYNCHRONIZE,
           DROPSCHEMA: process.env.DROPSCHEMA,
+          ACCOUNT: process.env.ACCOUNT,
+          PWS: process.env.PWS,
+          MAIL:process.env.MAIL,
         };
+        console.log(this.envConfig);
       }
     }
   
