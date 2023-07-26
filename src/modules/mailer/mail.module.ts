@@ -16,11 +16,11 @@ import { ConfigService } from "src/config/config.service";
                     port: 587,
                     secure: false,
                     auth: {
-                        user: 'watankes',
-                        pass: 'Cdekaur92'
+                        user: 'user',
+                        pass: 'pass'
                     },
                     default: {
-                        from: 'watankes@gmail.com',
+                        from: 'mail',
                     },
                     preview:true,
                     template: {
